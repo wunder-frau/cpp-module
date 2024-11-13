@@ -13,12 +13,12 @@ RED := \033[31m
 RESET := \033[0m
 
 all: $(NAME)
-	@echo "$(GREEN)🎉 Build successful!$(RESET)"
-	@echo "$(YELLOW)➡️  Usage: ./$(NAME)$(RESET)"
 
 $(NAME): $(OBJ)
 	@echo "$(BLUE)🔨 Linking $(NAME)...$(RESET)"
 	$(COMPILER) $(FLAGS) -o $(NAME) $(OBJ)
+	@echo "$(GREEN)🎉 Build successful!$(RESET)"
+	@echo "$(YELLOW)➡️  Usage: ./$(NAME)$(RESET)"
 
 %.o: %.cpp
 	@echo "$(YELLOW)📦 Compiling $<...$(RESET)"
