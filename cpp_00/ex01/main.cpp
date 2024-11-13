@@ -1,17 +1,17 @@
-#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
 int main() {
-    Contact contact;
+    PhoneBook phonebook;
+    std::string command;
 
-    contact.setFirstName("John");
-    contact.setLastName("Doe");
-    contact.setNickName("Johnny");
-    contact.setPhoneNumber("123-456-7890");
-    contact.setDarkestSecret("I love programming!");
+    while (true) {
+        std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
+        std::getline(std::cin, command);
 
-    printContactDetails(contact);
-
-    std::cout << "Nickname: " << contact.getNickName() << std::endl;
+        if (!phonebook.Run(command)) {
+            break;
+        }
+    }
 
     return 0;
 }
