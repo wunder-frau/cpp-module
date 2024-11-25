@@ -8,7 +8,7 @@ int main() {
         std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
         std::getline(std::cin, command);
 
-        if (!phonebook.Run(command)) {
+        if (!phonebook.run(command)) {
             break;
         }
     }

@@ -51,7 +51,7 @@ void PhoneBook::displayContact(int index) const {
     printContactDetails(contacts_[index]);
 }
 
-bool PhoneBook::Run(const std::string& cmd) {
+bool PhoneBook::run(const std::string& cmd) {
     if (cmd == "ADD") {
         addNewContact();
     } else if (cmd == "SEARCH") {
@@ -63,6 +63,46 @@ bool PhoneBook::Run(const std::string& cmd) {
                   << std::endl;
     }
     return true;
+}
+
+bool PhoneBook::isValidPhoneNumber(const std::string& number,
+                                   std::string& errorMsg) const {
+    if (number.length() < 2) {
+        errorMsg = "Phone number is too short. It must be at least 2 digits.";
+        return false;
+    }
+
+    if (number.length() > 16) {
+        errorMsg =
+            "Phone number is too long. It must be no more than 16 digits.";
+        return false;
+    }
+
+    for (char c : number) {
+        if (!std::isdigit(c)) {
+            errorMsg = "Phone number must contain digits only.";
+            return false;
+        }
+    }
+
+    errorMsg.clear();
+    return true;
+}
+
+std::string PhoneBook::getValidPhoneNumber() const {
+    std::string input;
+    std::string errorMsg;
+
+    while (true) {
+        std::cout << "Enter phone number (2-16 digits): ";
+        std::getline(std::cin, input);
+
+        if (isValidPhoneNumber(input, errorMsg)) {
+            return input;
+        } else {
+            std::cout << "Invalid phone number! " << errorMsg << std::endl;
+        }
+    }
 }
 
 void PhoneBook::addNewContact() {
@@ -80,10 +120,7 @@ void PhoneBook::addNewContact() {
     std::cout << "Enter nickname: ";
     std::getline(std::cin, input);
     newContact.setNickName(input);
-
-    std::cout << "Enter phone number: ";
-    std::getline(std::cin, input);
-    newContact.setPhoneNumber(input);
+    newContact.setPhoneNumber(getValidPhoneNumber());
 
     std::cout << "Enter darkest secret: ";
     std::getline(std::cin, input);

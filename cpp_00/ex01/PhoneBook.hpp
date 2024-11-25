@@ -9,7 +9,7 @@ class PhoneBook {
 public:
     PhoneBook() : contact_count_(0), oldest_index_(0) {};
 
-    bool Run(const std::string& cmd);
+    bool run(const std::string& cmd);
     void addContact(const Contact& newContact);
     void searchContacts() const;
     void displayContact(int index) const;
@@ -22,6 +22,9 @@ private:
     int contact_count_;
     int oldest_index_;
 
+    bool isValidPhoneNumber(const std::string& number,
+                            std::string& errorMsg) const;
+    std::string getValidPhoneNumber() const;
     void addNewContact();
     void searchForContact();
 };
