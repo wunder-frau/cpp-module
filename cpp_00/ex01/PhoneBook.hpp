@@ -22,8 +22,10 @@ private:
     int contact_count_;
     int oldest_index_;
 
+    bool isValidName(const std::string& name, std::string& errorMsg) const;
     bool isValidPhoneNumber(const std::string& number,
                             std::string& errorMsg) const;
+    std::string getValidName() const;
     std::string getValidPhoneNumber() const;
     void addNewContact();
     void searchForContact();

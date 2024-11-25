@@ -89,6 +89,18 @@ bool PhoneBook::isValidPhoneNumber(const std::string& number,
     return true;
 }
 
+bool PhoneBook::isValidName(const std::string& name,
+                            std::string& errorMsg) const {
+    for (char c : name) {
+        if (!std::isalpha(c)) {
+            errorMsg = "Name must contain only apha characters.";
+            return false;
+        }
+    }
+    errorMsg.clear();
+    return true;
+}
+
 std::string PhoneBook::getValidPhoneNumber() const {
     std::string input;
     std::string errorMsg;
@@ -105,13 +117,27 @@ std::string PhoneBook::getValidPhoneNumber() const {
     }
 }
 
+std::string PhoneBook::getValidName() const {
+    std::string input;
+    std::string errorMsg;
+
+    while (true) {
+        std::cout << "Enter first name: ";
+        std::getline(std::cin, input);
+
+        if (isValidName(input, errorMsg)) {
+            return input;
+        } else {
+            std::cout << "Invalid name! " << errorMsg << std::endl;
+        }
+    }
+}
+
 void PhoneBook::addNewContact() {
     Contact newContact;
     std::string input;
 
-    std::cout << "Enter first name: ";
-    std::getline(std::cin, input);
-    newContact.setFirstName(input);
+    newContact.setFirstName(getValidName());
 
     std::cout << "Enter last name: ";
     std::getline(std::cin, input);
