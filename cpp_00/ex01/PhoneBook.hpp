@@ -7,7 +7,6 @@
 
 class PhoneBook {
 public:
-    // Constructor
     PhoneBook() : contact_count_(0), oldest_index_(0) {};
 
     // Public interface methods
