@@ -12,7 +12,6 @@ public:
     bool run(const std::string& cmd);
     void searchContacts() const;
     void displayContact(int index) const;
-    // Declaration of printContactDetails function
     void printContactDetails(const Contact& contact) const;
 
 private:
