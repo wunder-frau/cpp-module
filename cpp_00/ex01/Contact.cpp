@@ -3,22 +3,46 @@
 #include "PhoneBook.hpp"
 
 bool Contact::setFirstName(const std::string& value) {
-    if (!isValidName(value))
+    std::string errorMsg;
+    if (value.empty()) {
+        errorMsg = "Name cannot be empty!";
+        std::cout << errorMsg << std::endl;
         return false;
+    } else if (value.length() > 50) {
+        errorMsg = "First name is too long! Maximum length is 50 characters.";
+        std::cout << errorMsg << std::endl;
+        return false;
+    }
     first_name_ = value;
     return true;
 }
 
 bool Contact::setLastName(const std::string& value) {
-    if (!isValidName(value))
+    std::string errorMsg;
+    if (value.empty()) {
+        errorMsg = "Last name cannot be empty!";
+        std::cout << errorMsg << std::endl;
         return false;
+    } else if (value.length() > 50) {
+        errorMsg = "Last name is too long! Maximum length is 50 characters.";
+        std::cout << errorMsg << std::endl;
+        return false;
+    }
     last_name_ = value;
     return true;
 }
 
 bool Contact::setNickName(const std::string& value) {
-    if (!isValidName(value))
+    std::string errorMsg;
+    if (value.empty()) {
+        errorMsg = "Nickname cannot be empty!";
+        std::cout << errorMsg << std::endl;
         return false;
+    } else if (value.length() > 50) {
+        errorMsg = "Nickname is too long! Maximum length is 50 characters.";
+        std::cout << errorMsg << std::endl;
+        return false;
+    }
     nick_name_ = value;
     return true;
 }

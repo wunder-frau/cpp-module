@@ -67,6 +67,9 @@ bool PhoneBook::run(const std::string& cmd) {
 
 std::string PhoneBook::getValidPhoneNumber() {
     std::string input;
+    if (input == "EXIT") {
+        return "";
+    }
     while (true) {
         std::cout << "Enter phone number (2-16 digits): ";
         std::getline(std::cin, input);
@@ -83,10 +86,18 @@ std::string PhoneBook::getValidName(const std::string& prompt) {
     while (true) {
         std::cout << "Enter " << prompt << ": ";
         std::getline(std::cin, input);
-        if (contacts_[0].setFirstName(input)) {
+
+        if (input == "EXIT") {
+            return "";
+        }
+        if (prompt == "name" && contacts_[0].setFirstName(input)) {
+            return input;
+        } else if (prompt == "last name" && contacts_[0].setLastName(input)) {
+            return input;
+        } else if (prompt == "nickname" && contacts_[0].setNickName(input)) {
             return input;
         } else {
-            std::cout << "Invalid name!" << std::endl;
+            std::cout << "Invalid input for " << prompt << ". Try again.\n";
         }
     }
 }
@@ -96,6 +107,9 @@ std::string PhoneBook::getValidDarkestSecret() {
     while (true) {
         std::cout << "Enter darkest secret: ";
         std::getline(std::cin, input);
+        if (input == "EXIT") {
+            return "";
+        }
         if (contacts_[0].setDarkestSecret(input)) {
             return input;
         }
@@ -103,6 +117,36 @@ std::string PhoneBook::getValidDarkestSecret() {
 }
 
 void PhoneBook::addNewContact() {
+    std::string firstName = getValidName("name");
+    if (firstName.empty()) {
+        std::cout << "Exiting contact creation..." << std::endl;
+        return;
+    }
+
+    std::string lastName = getValidName("last name");
+    if (lastName.empty()) {
+        std::cout << "Exiting contact creation..." << std::endl;
+        return;
+    }
+
+    std::string nickname = getValidName("nickname");
+    if (nickname.empty()) {
+        std::cout << "Exiting contact creation..." << std::endl;
+        return;
+    }
+
+    std::string phoneNumber = getValidPhoneNumber();
+    if (phoneNumber.empty()) {
+        std::cout << "Exiting contact creation..." << std::endl;
+        return;
+    }
+
+    std::string secret = getValidDarkestSecret();
+    if (secret.empty()) {
+        std::cout << "Exiting contact creation..." << std::endl;
+        return;
+    }
+
     Contact newContact;
     newContact.setFirstName(getValidName("name"));
     newContact.setLastName(getValidName("last name"));
