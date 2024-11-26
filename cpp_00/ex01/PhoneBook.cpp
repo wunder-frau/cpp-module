@@ -1,5 +1,6 @@
 #include "PhoneBook.hpp"
 
+#include "Contact.hpp"
 void PhoneBook::addContact(const Contact& newContact) {
     contacts_[oldest_index_] = newContact;
     if (contact_count_ < 8) {
@@ -37,7 +38,6 @@ void PhoneBook::displayContactRow(int index) const {
 
 void PhoneBook::searchContacts() const {
     displayHeader();
-
     for (int i = 0; i < contact_count_; ++i) {
         displayContactRow(i);
     }
@@ -65,109 +65,50 @@ bool PhoneBook::run(const std::string& cmd) {
     return true;
 }
 
-bool PhoneBook::isValidPhoneNumber(const std::string& number,
-                                   std::string& errorMsg) const {
-    if (number.empty()) {
-        errorMsg = "Number cannot be empty.";
-        return false;
-    }
-    if (number.length() < 2) {
-        errorMsg = "Phone number is too short. It must be at least 2 digits.";
-        return false;
-    }
-
-    if (number.length() > 16) {
-        errorMsg =
-            "Phone number is too long. It must be no more than 16 digits.";
-        return false;
-    }
-
-    for (char c : number) {
-        if (!std::isdigit(c)) {
-            errorMsg = "Phone number must contain digits only.";
-            return false;
-        }
-    }
-
-    errorMsg.clear();
-    return true;
-}
-
-bool PhoneBook::isValidName(const std::string& name,
-                            std::string& errorMsg) const {
-    if (name.empty()) {
-        errorMsg = "Name cannot be empty.";
-        return false;
-    }
-    for (char c : name) {
-        if (!std::isalpha(c) && c != ' ') {
-            errorMsg = "Name must contain only apha characters.";
-            return false;
-        }
-    }
-    errorMsg.clear();
-    return true;
-}
-
-std::string PhoneBook::getValidPhoneNumber() const {
+std::string PhoneBook::getValidPhoneNumber() {
     std::string input;
-    std::string errorMsg;
-
     while (true) {
         std::cout << "Enter phone number (2-16 digits): ";
         std::getline(std::cin, input);
-
-        if (isValidPhoneNumber(input, errorMsg)) {
+        if (contacts_[0].setPhoneNumber(input)) {
             return input;
         } else {
-            std::cout << "Invalid phone number! " << errorMsg << std::endl;
+            std::cout << "Invalid phone number!" << std::endl;
         }
     }
 }
 
-std::string PhoneBook::getValidName(const std::string& prompt) const {
+std::string PhoneBook::getValidName(const std::string& prompt) {
     std::string input;
-    std::string errorMsg;
-
     while (true) {
         std::cout << "Enter " << prompt << ": ";
         std::getline(std::cin, input);
-
-        if (isValidName(input, errorMsg)) {
+        if (contacts_[0].setFirstName(input)) {
             return input;
         } else {
-            std::cout << "Invalid " << prompt << "! " << errorMsg << std::endl;
+            std::cout << "Invalid name!" << std::endl;
         }
     }
 }
 
-std::string PhoneBook::getValidDarkestSecret() const {
+std::string PhoneBook::getValidDarkestSecret() {
     std::string input;
     while (true) {
         std::cout << "Enter darkest secret: ";
         std::getline(std::cin, input);
-
-        if (input.empty()) {
-            std::cout
-                << "Darkest secret cannot be empty. Please enter something."
-                << std::endl;
-        } else if (input.length() > 100) {
-            std::cout << "Darkest secret is too long. Please limit it to 100 "
-                         "characters."
-                      << std::endl;
-        } else {
+        if (contacts_[0].setDarkestSecret(input)) {
             return input;
+        } else {
+            std::cout << "Invalid darkest secret!" << std::endl;
         }
     }
 }
 
 void PhoneBook::addNewContact() {
     Contact newContact;
-    std::string input;
-
-    newContact.setFirstName(getValidName("name"));
+    newContact.setFirstName(getValidName("first name"));
     newContact.setLastName(getValidName("last name"));
-    newContact.setLastName(getValidName("nickname"));
+    newContact.setNickName(getValidName("nickname"));
     newContact.setPhoneNumber(getValidPhoneNumber());
     newContact.setDarkestSecret(getValidDarkestSecret());
     addContact(newContact);
@@ -180,4 +121,12 @@ void PhoneBook::searchForContact() {
     std::cin >> index;
     std::cin.ignore();
     displayContact(index);
+}
+
+void PhoneBook::printContactDetails(const Contact& contact) const {
+    std::cout << "First Name: " << contact.getFirstName() << std::endl;
+    std::cout << "Last Name: " << contact.getLastName() << std::endl;
+    std::cout << "Nickname: " << contact.getNickName() << std::endl;
+    std::cout << "Phone Number: " << contact.getPhoneNumber() << std::endl;
+    std::cout << "Darkest Secret: " << contact.getDarkestSecret() << std::endl;
 }
