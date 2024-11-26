@@ -1,7 +1,5 @@
 #include "Contact.hpp"
 
-#include "PhoneBook.hpp"
-
 bool Contact::setFirstName(const std::string& value) {
     std::string errorMsg;
     if (value.empty()) {
