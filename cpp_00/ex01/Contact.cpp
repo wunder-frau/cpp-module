@@ -31,7 +31,15 @@ bool Contact::setPhoneNumber(const std::string& value) {
 }
 
 bool Contact::setDarkestSecret(const std::string& value) {
-    if (value.empty() || value.length() > 100) {
+    std::string errorMsg;
+    if (value.empty()) {
+        errorMsg = "Darkest secret cannot be empty!";
+        std::cout << errorMsg << std::endl;
+        return false;
+    } else if (value.length() > 50) {
+        errorMsg =
+            "Darkest secret is too long! Maximum length is 50 characters.";
+        std::cout << errorMsg << std::endl;
         return false;
     }
     secret_ = value;

@@ -98,15 +98,13 @@ std::string PhoneBook::getValidDarkestSecret() {
         std::getline(std::cin, input);
         if (contacts_[0].setDarkestSecret(input)) {
             return input;
-        } else {
-            std::cout << "Invalid darkest secret!" << std::endl;
         }
     }
 }
 
 void PhoneBook::addNewContact() {
     Contact newContact;
-    newContact.setFirstName(getValidName("first name"));
+    newContact.setFirstName(getValidName("name"));
     newContact.setLastName(getValidName("last name"));
     newContact.setNickName(getValidName("nickname"));
     newContact.setPhoneNumber(getValidPhoneNumber());
