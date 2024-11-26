@@ -141,6 +141,26 @@ std::string PhoneBook::getValidName(const std::string& prompt) const {
     }
 }
 
+std::string PhoneBook::getValidDarkestSecret() const {
+    std::string input;
+    while (true) {
+        std::cout << "Enter darkest secret: ";
+        std::getline(std::cin, input);
+
+        if (input.empty()) {
+            std::cout
+                << "Darkest secret cannot be empty. Please enter something."
+                << std::endl;
+        } else if (input.length() > 100) {
+            std::cout << "Darkest secret is too long. Please limit it to 100 "
+                         "characters."
+                      << std::endl;
+        } else {
+            return input;
+        }
+    }
+}
+
 void PhoneBook::addNewContact() {
     Contact newContact;
     std::string input;
@@ -148,15 +168,8 @@ void PhoneBook::addNewContact() {
     newContact.setFirstName(getValidName("name"));
     newContact.setLastName(getValidName("last name"));
     newContact.setLastName(getValidName("nickname"));
-    // std::cout << "Enter nickname: ";
-    // std::getline(std::cin, input);
-    // newContact.setNickName(input);
     newContact.setPhoneNumber(getValidPhoneNumber());
-
-    std::cout << "Enter darkest secret: ";
-    std::getline(std::cin, input);
-    newContact.setDarkestSecret(input);
-
+    newContact.setDarkestSecret(getValidDarkestSecret());
     addContact(newContact);
 }
 
