@@ -67,6 +67,10 @@ bool PhoneBook::run(const std::string& cmd) {
 
 bool PhoneBook::isValidPhoneNumber(const std::string& number,
                                    std::string& errorMsg) const {
+    if (number.empty()) {
+        errorMsg = "Number cannot be empty.";
+        return false;
+    }
     if (number.length() < 2) {
         errorMsg = "Phone number is too short. It must be at least 2 digits.";
         return false;
@@ -91,8 +95,12 @@ bool PhoneBook::isValidPhoneNumber(const std::string& number,
 
 bool PhoneBook::isValidName(const std::string& name,
                             std::string& errorMsg) const {
+    if (name.empty()) {
+        errorMsg = "Name cannot be empty.";
+        return false;
+    }
     for (char c : name) {
-        if (!std::isalpha(c)) {
+        if (!std::isalpha(c) && c != ' ') {
             errorMsg = "Name must contain only apha characters.";
             return false;
         }
@@ -117,18 +125,18 @@ std::string PhoneBook::getValidPhoneNumber() const {
     }
 }
 
-std::string PhoneBook::getValidName() const {
+std::string PhoneBook::getValidName(const std::string& prompt) const {
     std::string input;
     std::string errorMsg;
 
     while (true) {
-        std::cout << "Enter first name: ";
+        std::cout << "Enter " << prompt << ": ";
         std::getline(std::cin, input);
 
         if (isValidName(input, errorMsg)) {
             return input;
         } else {
-            std::cout << "Invalid name! " << errorMsg << std::endl;
+            std::cout << "Invalid " << prompt << "! " << errorMsg << std::endl;
         }
     }
 }
@@ -137,15 +145,12 @@ void PhoneBook::addNewContact() {
     Contact newContact;
     std::string input;
 
-    newContact.setFirstName(getValidName());
-
-    std::cout << "Enter last name: ";
-    std::getline(std::cin, input);
-    newContact.setLastName(input);
-
-    std::cout << "Enter nickname: ";
-    std::getline(std::cin, input);
-    newContact.setNickName(input);
+    newContact.setFirstName(getValidName("name"));
+    newContact.setLastName(getValidName("last name"));
+    newContact.setLastName(getValidName("nickname"));
+    // std::cout << "Enter nickname: ";
+    // std::getline(std::cin, input);
+    // newContact.setNickName(input);
     newContact.setPhoneNumber(getValidPhoneNumber());
 
     std::cout << "Enter darkest secret: ";

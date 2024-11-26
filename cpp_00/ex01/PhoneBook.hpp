@@ -25,7 +25,7 @@ private:
     bool isValidName(const std::string& name, std::string& errorMsg) const;
     bool isValidPhoneNumber(const std::string& number,
                             std::string& errorMsg) const;
-    std::string getValidName() const;
+    std::string getValidName(const std::string& prompt) const;
     std::string getValidPhoneNumber() const;
     void addNewContact();
     void searchForContact();
