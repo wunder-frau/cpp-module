@@ -72,7 +72,12 @@ std::string PhoneBook::getValidPhoneNumber() {
     }
     while (true) {
         std::cout << "Enter phone number (2-16 digits): ";
-        std::getline(std::cin, input);
+        if (!std::getline(std::cin, input)) {
+            std::cout
+                << "\nThis means EOF (Ctrl+D) or error occurred. Exiting..."
+                << std::endl;
+            return "";
+        }
         if (contacts_[0].setPhoneNumber(input)) {
             return input;
         } else {
@@ -85,7 +90,12 @@ std::string PhoneBook::getValidName(const std::string& prompt) {
     std::string input;
     while (true) {
         std::cout << "Enter " << prompt << ": ";
-        std::getline(std::cin, input);
+        if (!std::getline(std::cin, input)) {
+            std::cout
+                << "\nThis means EOF (Ctrl+D) or error occurred. Exiting..."
+                << std::endl;
+            return "";
+        }
 
         if (input == "EXIT") {
             return "";
@@ -106,7 +116,12 @@ std::string PhoneBook::getValidDarkestSecret() {
     std::string input;
     while (true) {
         std::cout << "Enter darkest secret: ";
-        std::getline(std::cin, input);
+        if (!std::getline(std::cin, input)) {
+            std::cout
+                << "\nThis means EOF (Ctrl+D) or error occurred. Exiting..."
+                << std::endl;
+            return "";
+        }
         if (input == "EXIT") {
             return "";
         }
@@ -161,8 +176,12 @@ void PhoneBook::searchForContact() {
     searchContacts();
     std::cout << "Enter the index of the contact to display: ";
     int index;
-    std::cin >> index;
-    std::cin.ignore();
+    if (!(std::cin >> index)) {
+        std::cin.clear();
+        std::cout << "\nEOF or invalid input detected. Exiting search...\n";
+        return;
+    }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     displayContact(index);
 }
 
