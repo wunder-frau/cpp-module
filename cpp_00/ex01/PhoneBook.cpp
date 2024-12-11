@@ -126,7 +126,6 @@ std::string PhoneBook::getValidName(const std::string& prompt) {
             return "";
         }
 
-        // Trim leading and trailing whitespaces
         size_t start = input.find_first_not_of(" \t\n\r");
         size_t end = input.find_last_not_of(" \t\n\r");
         if (start == std::string::npos) {
@@ -140,7 +139,11 @@ std::string PhoneBook::getValidName(const std::string& prompt) {
             return "";
         }
 
-        // Basic validation: non-empty, <=50 chars, alphabetic and spaces
+        size_t firstSpace = input.find(' ');
+        if (firstSpace != std::string::npos) {
+            input = input.substr(0, firstSpace);
+        }
+
         bool valid = true;
         if (input.empty() || input.length() > 50) {
             valid = false;
