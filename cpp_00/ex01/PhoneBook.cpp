@@ -51,18 +51,29 @@ void PhoneBook::displayContact(int index) const {
     printContactDetails(contacts_[index]);
 }
 
-bool PhoneBook::run(const std::string& cmd) {
-    if (cmd == "ADD") {
-        addNewContact();
-    } else if (cmd == "SEARCH") {
-        searchForContact();
-    } else if (cmd == "EXIT") {
-        return false;
-    } else {
-        std::cout << "Unknown command. Please enter ADD, SEARCH, or EXIT."
-                  << std::endl;
+void PhoneBook::run() {
+    std::string command;
+
+    while (true) {
+        std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
+        if (!std::getline(std::cin, command)) {
+            std::cout
+                << "\nThis means EOF (Ctrl+D) or error occurred. Exiting..."
+                << std::endl;
+            break;
+        }
+
+        if (command == "ADD") {
+            addNewContact();
+        } else if (command == "SEARCH") {
+            searchForContact();
+        } else if (command == "EXIT") {
+            break;  // Exit the loop
+        } else {
+            std::cout << "Unknown command. Please enter ADD, SEARCH, or EXIT."
+                      << std::endl;
+        }
     }
-    return true;
 }
 
 std::string PhoneBook::getValidPhoneNumber() {

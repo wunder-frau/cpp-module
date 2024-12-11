@@ -9,7 +9,7 @@ class PhoneBook {
 public:
     PhoneBook() : contact_count_(0), oldest_index_(0) {};
 
-    bool run(const std::string& cmd);
+    void run();
     void searchContacts() const;
     void displayContact(int index) const;
     void printContactDetails(const Contact& contact) const;
