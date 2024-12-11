@@ -1,13 +1,14 @@
 #pragma once
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <string>
 
 #include "Contact.hpp"
 
 class PhoneBook {
 public:
-    PhoneBook() : contact_count_(0), oldest_index_(0) {};
+    PhoneBook() : contact_count_(0), oldest_index_(0), should_exit_(false) {}
 
     void run();
     void searchContacts() const;
@@ -30,4 +31,5 @@ private:
     Contact contacts_[8];
     int contact_count_;
     int oldest_index_;
+    bool should_exit_;
 };
