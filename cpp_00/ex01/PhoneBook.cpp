@@ -148,11 +148,12 @@ void PhoneBook::addNewContact() {
     }
 
     Contact newContact;
-    newContact.setFirstName(getValidName("name"));
-    newContact.setLastName(getValidName("last name"));
-    newContact.setNickName(getValidName("nickname"));
-    newContact.setPhoneNumber(getValidPhoneNumber());
-    newContact.setDarkestSecret(getValidDarkestSecret());
+    newContact.setFirstName(firstName);
+    newContact.setLastName(lastName);
+    newContact.setNickName(nickname);
+    newContact.setPhoneNumber(phoneNumber);
+    newContact.setDarkestSecret(secret);
+
     addContact(newContact);
 }
 
