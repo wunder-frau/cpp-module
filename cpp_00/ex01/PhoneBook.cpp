@@ -71,8 +71,7 @@ void PhoneBook::printContactDetails(const Contact& contact) const {
 std::string PhoneBook::getValidPhoneNumber() {
     std::string input;
     while (true) {
-        std::cout
-            << "Enter phone number (2-16 digits) or type 'EXIT' to cancel: ";
+        std::cout << "Enter phone number (2-16 digits): ";
         if (!std::getline(std::cin, input)) {
             std::cout << "\nEOF (Ctrl+D) or input error detected. Exiting..."
                       << std::endl;
@@ -119,7 +118,7 @@ std::string PhoneBook::getValidPhoneNumber() {
 std::string PhoneBook::getValidName(const std::string& prompt) {
     std::string input;
     while (true) {
-        std::cout << "Enter " << prompt << " or type 'EXIT' to cancel: ";
+        std::cout << "Enter " << prompt << ": ";
         if (!std::getline(std::cin, input)) {
             std::cout << "\nEOF (Ctrl+D) or input error detected. Exiting..."
                       << std::endl;
@@ -170,7 +169,7 @@ std::string PhoneBook::getValidName(const std::string& prompt) {
 std::string PhoneBook::getValidDarkestSecret() {
     std::string input;
     while (true) {
-        std::cout << "Enter darkest secret or type 'EXIT' to cancel: ";
+        std::cout << "Enter darkest secret: ";
         if (!std::getline(std::cin, input)) {
             std::cout << "\nEOF (Ctrl+D) or input error detected. Exiting..."
                       << std::endl;
@@ -254,70 +253,68 @@ void PhoneBook::searchForContact() {
     }
 
     searchContacts();
-    std::cout << "Enter the index of the contact to display (0-"
-              << (contact_count_ - 1) << ") or type 'EXIT' to cancel: ";
+    while (true) {
+        std::cout << "Enter the index of the contact to display (0-"
+                  << (contact_count_ - 1) << "): ";
 
-    std::string input;
-    if (!std::getline(std::cin, input)) {
-        // Handle EOF (e.g., Ctrl+D)
-        std::cout << "\nEOF detected. Exiting search..." << std::endl;
-        should_exit_ = true;  // Set the flag to indicate exit
-        return;
-    }
-
-    // Trim leading and trailing whitespaces
-    size_t start = input.find_first_not_of(" \t\n\r");
-    size_t end = input.find_last_not_of(" \t\n\r");
-    if (start == std::string::npos) {
-        std::cout << "Invalid input! Please enter a valid index or 'EXIT'."
-                  << std::endl;
-        return;
-    }
-    input = input.substr(start, end - start + 1);
-
-    if (input == "EXIT") {
-        std::cout << "Exiting search..." << std::endl;
-        return;
-    }
-
-    // Check if the input is a valid number
-    bool isNumber = true;
-    for (char c : input) {
-        if (!std::isdigit(c)) {
-            isNumber = false;
-            break;
+        std::string input;
+        if (!std::getline(std::cin, input)) {
+            std::cout << "\nEOF detected. Exiting search..." << std::endl;
+            should_exit_ = true;
+            return;
         }
-    }
 
-    if (!isNumber) {
-        std::cout << "Invalid input! Please enter a numerical index or 'EXIT'."
-                  << std::endl;
+        size_t start = input.find_first_not_of(" \t\n\r");
+        size_t end = input.find_last_not_of(" \t\n\r");
+        if (start == std::string::npos) {
+            std::cout << "Invalid input! Please enter a valid index or 'EXIT'."
+                      << std::endl;
+            continue;
+        }
+        input = input.substr(start, end - start + 1);
+
+        if (input == "EXIT") {
+            std::cout << "Exiting search..." << std::endl;
+            return;
+        }
+
+        bool isNumber = true;
+        for (char c : input) {
+            if (!std::isdigit(c)) {
+                isNumber = false;
+                break;
+            }
+        }
+
+        if (!isNumber) {
+            std::cout
+                << "Invalid input! Please enter a numerical index or 'EXIT'."
+                << std::endl;
+            continue;
+        }
+
+        int index;
+        try {
+            index = std::stoi(input);
+        } catch (const std::invalid_argument&) {
+            std::cout << "Invalid input! Please enter a valid number or 'EXIT'."
+                      << std::endl;
+            continue;
+        } catch (const std::out_of_range&) {
+            std::cout
+                << "Input out of range! Please enter a number between 0 and "
+                << (contact_count_ - 1) << "." << std::endl;
+            continue;
+        }
+
+        if (index < 0 || index >= contact_count_) {
+            std::cout << "Invalid index! Please enter a number between 0 and "
+                      << (contact_count_ - 1) << "." << std::endl;
+            continue;
+        }
+        displayContact(index);
         return;
     }
-
-    // Convert string to int
-    int index;
-    try {
-        index = std::stoi(input);
-    } catch (const std::invalid_argument& e) {
-        std::cout << "Invalid input! Please enter a valid number or 'EXIT'."
-                  << std::endl;
-        return;
-    } catch (const std::out_of_range& e) {
-        std::cout << "Input out of range! Please enter a number between 0 and "
-                  << (contact_count_ - 1) << "." << std::endl;
-        return;
-    }
-
-    // Validate index range
-    if (index < 0 || index >= contact_count_) {
-        std::cout << "Invalid index! Please enter a number between 0 and "
-                  << (contact_count_ - 1) << "." << std::endl;
-        return;
-    }
-
-    // Display the contact
-    displayContact(index);
 }
 
 // ===============================
