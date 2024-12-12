@@ -330,7 +330,7 @@ void PhoneBook::run() {
             }
             break;
         }
-        s size_t start = command.find_first_not_of(" \t\n\r");
+        size_t start = command.find_first_not_of(" \t\n\r");
         size_t end = command.find_last_not_of(" \t\n\r");
         if (start != std::string::npos) {
             command = command.substr(start, end - start + 1);
