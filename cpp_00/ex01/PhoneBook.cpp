@@ -78,7 +78,6 @@ std::string PhoneBook::getValidPhoneNumber() {
             return "";
         }
 
-        // Trim leading and trailing whitespaces
         size_t start = input.find_first_not_of(" \t\n\r");
         size_t end = input.find_last_not_of(" \t\n\r");
         if (start == std::string::npos) {
@@ -93,7 +92,6 @@ std::string PhoneBook::getValidPhoneNumber() {
             return "";
         }
 
-        // Validate phone number: only digits and length between 2 and 16
         bool valid = true;
         if (input.length() < 2 || input.length() > 16) {
             valid = false;
@@ -176,7 +174,6 @@ std::string PhoneBook::getValidDarkestSecret() {
             return "";
         }
 
-        // Trim leading and trailing whitespaces
         size_t start = input.find_first_not_of(" \t\n\r");
         size_t end = input.find_last_not_of(" \t\n\r");
         if (start == std::string::npos) {
@@ -190,7 +187,6 @@ std::string PhoneBook::getValidDarkestSecret() {
             return "";
         }
 
-        // Basic validation: non-empty and <=100 characters
         if (!input.empty() && input.length() <= 100) {
             return input;
         } else {
@@ -327,16 +323,14 @@ void PhoneBook::run() {
     while (true) {
         std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
         if (!std::getline(std::cin, command)) {
-            if (!should_exit_) {  // Only print if not already exiting
+            if (!should_exit_) {
                 std::cout
                     << "\nThis means EOF (Ctrl+D) or error occurred. Exiting..."
                     << std::endl;
             }
             break;
         }
-
-        // Trim leading and trailing whitespaces
-        size_t start = command.find_first_not_of(" \t\n\r");
+        s size_t start = command.find_first_not_of(" \t\n\r");
         size_t end = command.find_last_not_of(" \t\n\r");
         if (start != std::string::npos) {
             command = command.substr(start, end - start + 1);
@@ -349,13 +343,13 @@ void PhoneBook::run() {
         } else if (command == "SEARCH") {
             searchForContact();
         } else if (command == "EXIT") {
-            break;  // Exit the loop
+            break;
         } else {
             std::cout << "Unknown command. Please enter ADD, SEARCH, or EXIT."
                       << std::endl;
         }
 
-        if (should_exit_) {  // Check if a subroutine requested to exit
+        if (should_exit_) {
             break;
         }
     }
