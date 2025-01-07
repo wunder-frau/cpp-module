@@ -3,12 +3,13 @@
 #include <string>
 
 class Zombie {
-private:
-    std::string name;  // The name of the zombie
-
 public:
-    Zombie(std::string zombieName = "");  // Constructor
-    ~Zombie();                            // Destructor
+    Zombie();
+    Zombie(const std::string& zombieName);
+    ~Zombie();
 
-    void announce() const;  // Print the zombie's announcement
+    void announce() const;
+
+private:
+    std::string name_ = "";
 };
