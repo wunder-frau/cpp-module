@@ -1,5 +1,4 @@
-#ifndef HARL_HPP
-#define HARL_HPP
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -9,15 +8,13 @@ public:
     Harl();
     ~Harl();
 
-    void complain(const std::string &level);
+    void complain(const std::string& level);
 
 private:
+    void (Harl::*complaints_[4])();  // array of member function pointers
+
     void debug();
     void info();
     void warning();
     void error();
-
-    void (Harl::*complaints[4])();
 };
-
-#endif
