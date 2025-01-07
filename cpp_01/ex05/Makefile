@@ -21,7 +21,7 @@ $(NAME): $(OBJ)
 	@echo "$(BLUE)🔗 Linking $(NAME)... 🚀$(RESET)"
 	$(COMPILER) $(FLAGS) -o $(NAME) $(OBJ)
 	@echo "$(GREEN)✅ Build successful! Harl is ready! 🗣️$(RESET)"
-	@echo "$(YELLOW)➡️ Usage: ./$(NAME) <level> 🗣️$(RESET)"
+	@echo "$(YELLOW)➡️ Usage: ./$(NAME) 🗣️$(RESET)"
 
 # Rule for compiling each .cpp file to .o file
 %.o: %.cpp
