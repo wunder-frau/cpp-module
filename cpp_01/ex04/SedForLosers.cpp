@@ -3,13 +3,13 @@
 #include <fstream>
 #include <iostream>
 
-SedForLosers::SedForLosers(const std::string &filename, const std::string &s1,
-                           const std::string &s2)
-    : _filename(filename), _s1(s1), _s2(s2) {}
+SedForLosers::SedForLosers(const std::string& filename, const std::string& s1,
+                           const std::string& s2)
+    : filename_(filename), s1_(s1), s2_(s2) {}
 
 SedForLosers::~SedForLosers() {}
 
-bool SedForLosers::process() {
+bool SedForLosers::process() const {
     std::string content = readFile();
     if (content.empty()) {
         std::cerr << "Error: File is empty or could not be read." << std::endl;
@@ -19,10 +19,10 @@ bool SedForLosers::process() {
     return writeFile(replacedContent);
 }
 
-std::string SedForLosers::readFile() {
-    std::ifstream infile(_filename);
+std::string SedForLosers::readFile() const {
+    std::ifstream infile(filename_);
     if (!infile.is_open()) {
-        std::cerr << "Error: Cannot open file " << _filename << std::endl;
+        std::cerr << "Error: Cannot open file " << filename_ << std::endl;
         return "";
     }
 
@@ -34,8 +34,8 @@ std::string SedForLosers::readFile() {
     return content;
 }
 
-bool SedForLosers::writeFile(const std::string &content) {
-    std::ofstream outfile(_filename + ".replace");
+bool SedForLosers::writeFile(const std::string& content) const {
+    std::ofstream outfile(filename_ + ".replace");
     if (!outfile.is_open()) {
         std::cerr << "Error: Cannot create output file." << std::endl;
         return false;
@@ -45,13 +45,13 @@ bool SedForLosers::writeFile(const std::string &content) {
     return true;
 }
 
-std::string SedForLosers::replaceAll(const std::string &content) {
+std::string SedForLosers::replaceAll(const std::string& content) const {
     std::string result;
     size_t pos = 0, prev = 0;
-    while ((pos = content.find(_s1, prev)) != std::string::npos) {
+    while ((pos = content.find(s1_, prev)) != std::string::npos) {
         result.append(content, prev, pos - prev);
-        result.append(_s2);
-        prev = pos + _s1.length();
+        result.append(s2_);
+        prev = pos + s1_.length();
     }
     result.append(content, prev, std::string::npos);
     return result;

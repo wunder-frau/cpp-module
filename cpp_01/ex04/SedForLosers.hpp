@@ -4,18 +4,16 @@
 
 class SedForLosers {
 public:
-    SedForLosers(const std::string &filename, const std::string &s1,
-                 const std::string &s2);
+    SedForLosers(const std::string& filename, const std::string& s1,
+                 const std::string& s2);
     ~SedForLosers();
 
-    bool process();
+    bool process() const;
 
 private:
-    std::string _filename;
-    std::string _s1;
-    std::string _s2;
+    std::string filename_, s1_, s2_;
 
-    std::string readFile();
-    std::string replaceAll(const std::string &content);
-    bool writeFile(const std::string &content);
+    std::string readFile() const;
+    std::string replaceAll(const std::string& content) const;
+    bool writeFile(const std::string& content) const;
 };
