@@ -33,7 +33,7 @@ public:
 
 private:
     std::string name_ = {};
-    Points points_ = {10, 10, 5};
+    Points points_ = {10, 10, 0};
 
     // Members
     // Element access
