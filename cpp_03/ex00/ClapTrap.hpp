@@ -3,7 +3,7 @@
 #include <string>
 
 class ClapTrap {
-    using uint_t = std::uint32_t;
+    using uint_t = unsigned int;
 
     struct Points {
         uint_t hit, energy, damage;
