@@ -4,7 +4,7 @@
 
 class Fixed {
 public:
-    // Con- and destructors, assignements {{{
+    // Con- and destructors, assignements
     explicit Fixed();
 
     explicit Fixed(const int);
@@ -17,7 +17,7 @@ public:
     Fixed& operator=(const Fixed&);
     //
 
-    // Overloads {{{
+    // Overloads
     // In- and decrement
     inline Fixed& operator++(void) {
         ++value_;
@@ -64,7 +64,7 @@ public:
 
     //
 
-    // Static members {{{
+    // Static members
     inline static Fixed& min(Fixed& a, Fixed& b) { return a < b ? a : b; }
     inline static const Fixed& min(const Fixed& a, const Fixed& b) {
         return a < b ? a : b;
