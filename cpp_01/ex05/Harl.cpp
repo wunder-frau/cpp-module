@@ -13,8 +13,7 @@ void Harl::complain(const std::string& level) {
     std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
     for (int i = 0; i < 4; i++) {
         if (level == levels[i]) {
-            std::cout << "Matched level: " << levels[i]
-                      << std::endl;  // Debugging line
+            std::cout << "Matched level: " << levels[i] << std::endl;
             (this->*complaints_[i])();
             return;
         }
