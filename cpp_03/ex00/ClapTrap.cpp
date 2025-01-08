@@ -34,12 +34,6 @@ void ClapTrap::attack(const std::string& target) {
     if (isDead())
         return;
 
-    if (points_.energy == 0) {
-        std::cout << "ClapTrap " << name_ << " has no energy to attack!"
-                  << std::endl;
-        return;
-    }
-
     std::cout << "ClapTrap " << name_ << " attacks " << target << ", causing "
               << points_.damage << " points of damage!" << std::endl;
     --points_.hit;
