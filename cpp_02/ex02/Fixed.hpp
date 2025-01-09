@@ -19,61 +19,34 @@ public:
 
     // Overloads
     // In- and decrement
-    inline Fixed& operator++(void) {
-        ++value_;
-        return *this;
-    }
-    inline Fixed& operator--(void) {
-        --value_;
-        return *this;
-    }
+    Fixed& operator++(void);
+    Fixed& operator--(void);
 
-    inline Fixed operator++(int) {
-        const Fixed tmp = *this;
-        operator++();
-        return tmp;
-    }
-    inline Fixed operator--(int) {
-        const Fixed tmp = *this;
-        operator--();
-        return tmp;
-    }
+    Fixed operator++(int);
+    Fixed operator--(int);
 
     // Arithmetic
-    inline Fixed operator+(const Fixed& other) const {
-        return Fixed(toFloat() + other.toFloat());
-    }
-    inline Fixed operator-(const Fixed& other) const {
-        return Fixed(toFloat() - other.toFloat());
-    }
-    inline Fixed operator*(const Fixed& other) const {
-        return Fixed(toFloat() * other.toFloat());
-    }
-    inline Fixed operator/(const Fixed& other) const {
-        return Fixed(toFloat() / other.toFloat());
-    }
+    Fixed operator+(const Fixed& other) const;
+    Fixed operator-(const Fixed& other) const;
+    Fixed operator*(const Fixed& other) const;
+    Fixed operator/(const Fixed& other) const;
 
     // Comparisons
-    inline auto operator==(const Fixed& other) const {
-        return value_ == other.value_;
-    }
+    bool operator==(const Fixed& other) const;
 
-    inline auto operator<=>(const Fixed& other) const {
-        return value_ <=> other.value_;
-    }
+    bool operator>(const Fixed& other) const;
+    bool operator>=(const Fixed& other) const;
+    bool operator<(const Fixed& other) const;
+    bool operator<=(const Fixed& other) const;
 
     //
 
     // Static members
-    inline static Fixed& min(Fixed& a, Fixed& b) { return a < b ? a : b; }
-    inline static const Fixed& min(const Fixed& a, const Fixed& b) {
-        return a < b ? a : b;
-    }
+    static Fixed& min(Fixed& a, Fixed& b);
+    static const Fixed& min(const Fixed& a, const Fixed& b);
 
-    inline static Fixed& max(Fixed& a, Fixed& b) { return a > b ? a : b; }
-    inline static const Fixed& max(const Fixed& a, const Fixed& b) {
-        return a > b ? a : b;
-    }
+    static Fixed& max(Fixed& a, Fixed& b);
+    static const Fixed& max(const Fixed& a, const Fixed& b);
     //
 
     // Members

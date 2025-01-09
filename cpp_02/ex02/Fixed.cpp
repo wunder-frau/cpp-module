@@ -32,6 +32,67 @@ Fixed::~Fixed() {
 }
 //
 
+// Overloads
+// In- and decrement
+Fixed& Fixed::operator++(void) {
+    ++value_;
+    return *this;
+}
+Fixed& Fixed::operator--(void) {
+    --value_;
+    return *this;
+}
+
+Fixed Fixed::operator++(int) {
+    const Fixed tmp = *this;
+    operator++();
+    return tmp;
+}
+Fixed Fixed::operator--(int) {
+    const Fixed tmp = *this;
+    operator--();
+    return tmp;
+}
+
+// Arithmetic
+Fixed Fixed::operator+(const Fixed& other) const {
+    return Fixed(toFloat() + other.toFloat());
+}
+Fixed Fixed::operator-(const Fixed& other) const {
+    return Fixed(toFloat() - other.toFloat());
+}
+Fixed Fixed::operator*(const Fixed& other) const {
+    return Fixed(toFloat() * other.toFloat());
+}
+Fixed Fixed::operator/(const Fixed& other) const {
+    return Fixed(toFloat() / other.toFloat());
+}
+
+// Comparisons
+bool Fixed::operator==(const Fixed& other) const {
+    return value_ == other.value_;
+}
+
+bool Fixed::operator>(const Fixed& other) const {
+    return value_ > other.value_;
+}
+bool Fixed::operator>=(const Fixed& other) const {
+    return *this > other || *this == other;
+}
+bool Fixed::operator<(const Fixed& other) const { return !(*this >= other); }
+bool Fixed::operator<=(const Fixed& other) const { return !(*this > other); }
+
+// Static members
+Fixed& Fixed::min(Fixed& a, Fixed& b) { return a < b ? a : b; }
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b) {
+    return a < b ? a : b;
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b) { return a > b ? a : b; }
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b) {
+    return a > b ? a : b;
+}
+
 // Members
 // Element access
 int Fixed::getRawBits(void) const {
