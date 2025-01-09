@@ -6,7 +6,7 @@ CXXFLAGS = -Wall -Wextra -std=c++20
 TARGET = animal_app
 
 # Source files
-SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp
+SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp WrongDog.cpp
 
 # Object files
 OBJ = $(SRC:.cpp=.o)
