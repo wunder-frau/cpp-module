@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-//: Con- and destructors, assignements {{{
+// Con- and destructors, assignements
 ScavTrap::ScavTrap(const std::string& name)
     : ClapTrap::ClapTrap(name, {100, 50, 20}, "ScavTrap") {
     std::cout << "ScavTrap assignment constructor called" << std::endl;
@@ -21,11 +21,11 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
     ClapTrap::operator=(other);
     return *this;
 }
-//: }}}
+//
 
-//: Public members {{{
+// Public members
 void ScavTrap::guardGate() const {
     std::cout << ClapTrap::getSecret() << ' ' << ClapTrap::getName()
               << " is now in Gate keeper mode." << std::endl;
 }
-//: }}}
+//

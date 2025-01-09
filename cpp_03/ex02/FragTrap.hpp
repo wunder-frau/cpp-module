@@ -5,7 +5,7 @@
 
 class FragTrap final : public ClapTrap {
 public:
-    //: Con- and destructors, assignements {{{
+    // Con- and destructors, assignements
     explicit FragTrap() = delete;
 
     explicit FragTrap(const std::string&);
@@ -15,9 +15,9 @@ public:
     ~FragTrap();
 
     FragTrap& operator=(const FragTrap&);
-    //: }}}
+    //
 
-    //: Members {{{
+    // Members
     void highFivesGuys() const;
-    //: }}}
+    //
 };

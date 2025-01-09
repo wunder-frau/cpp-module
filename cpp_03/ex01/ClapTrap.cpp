@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-//: Con- and destructors, assignements {{{
+// Con- and destructors, assignements
 ClapTrap::ClapTrap() {
     std::cout << "ClapTrap default constructor called" << std::endl;
 }
@@ -33,10 +33,10 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
     secret_ = other.secret_;
     return *this;
 }
-//: }}}
+//
 
-//: Public members {{{
-//: Modifiers
+// Public members
+// Modifiers
 void ClapTrap::attack(const std::string& target) {
     if (isDead())
         return;
@@ -66,14 +66,14 @@ void ClapTrap::beRepaired(const ClapTrap::uint_t amount) {
     --points_.energy;
     points_.hit += amount;
 }
-//: }}}
+//
 
-//: Private members {{{
-//: Element access
+// Private members
+// Element access
 bool ClapTrap::isDead() const {
     const bool is_dead = points_.hit == 0 || points_.energy == 0;
     if (is_dead)
         std::cout << secret_ << ' ' << name_ << " is dead!" << std::endl;
     return is_dead;
 }
-//: }}}
+//

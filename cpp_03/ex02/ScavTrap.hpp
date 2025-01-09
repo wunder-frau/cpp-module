@@ -4,7 +4,7 @@
 
 class ScavTrap final : public ClapTrap {
 public:
-    //: Con- and destructors, assignements {{{
+    // Con- and destructors, assignements
     explicit ScavTrap() = delete;
 
     explicit ScavTrap(const std::string&);
@@ -14,9 +14,9 @@ public:
     ~ScavTrap();
 
     ScavTrap& operator=(const ScavTrap&);
-    //: }}}
+    //
 
-    //: Static members {{{
+    // Static members
     void guardGate() const;
-    //: }}}
+    //
 };

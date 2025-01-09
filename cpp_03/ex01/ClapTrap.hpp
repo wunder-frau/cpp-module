@@ -10,7 +10,7 @@ protected:
     };
 
 public:
-    //: Con- and destructors, assignements {{{
+    // Con- and destructors, assignements
     explicit ClapTrap();
 
     explicit ClapTrap(const std::string&);
@@ -20,10 +20,10 @@ public:
     ~ClapTrap();
 
     ClapTrap& operator=(const ClapTrap&);
-    //: }}}
+    //
 
-    //: Members {{{
-    //: Element access
+    // Members
+    // Element access
     inline const std::string& getName() const { return name_; }
 
     //: Modifiers
@@ -32,24 +32,24 @@ public:
     void takeDamage(uint_t);
 
     void beRepaired(uint_t);
-    //: }}}
+    //
 
 protected:
-    //: Con- and destructors, assignements {{{
+    // Con- and destructors, assignements
     explicit ClapTrap(const std::string&, const Points&, const std::string&);
-    //: }}}
+    //
 
-    //: Members {{{
+    // Members
     inline const std::string& getSecret() const { return secret_; }
-    //: }}}
+    //
 
 private:
     std::string name_ = {};
     Points points_ = {10, 10, 0};
     std::string secret_ = "ClapTrap";
 
-    //: Members {{{
-    //: Element access
+    // Members
+    // Element access
     bool isDead() const;
-    //: }}}
+    //
 };
