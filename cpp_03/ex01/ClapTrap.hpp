@@ -24,7 +24,7 @@ public:
 
     // Members
     // Element access
-    inline const std::string& getName() const { return name_; }
+    const std::string& getName() const;
 
     //: Modifiers
     void attack(const std::string&);
@@ -40,7 +40,7 @@ protected:
     //
 
     // Members
-    inline const std::string& getSecret() const { return secret_; }
+    const std::string& getSecret() const;
     //
 
 private:

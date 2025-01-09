@@ -33,7 +33,10 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
     secret_ = other.secret_;
     return *this;
 }
-//
+
+// Members
+// Element access
+const std::string& ClapTrap::getName() const { return name_; }
 
 // Public members
 // Modifiers
@@ -66,7 +69,9 @@ void ClapTrap::beRepaired(const ClapTrap::uint_t amount) {
     --points_.energy;
     points_.hit += amount;
 }
-//
+
+// Protected members
+const std::string& ClapTrap::getSecret() const { return secret_; }
 
 // Private members
 // Element access
