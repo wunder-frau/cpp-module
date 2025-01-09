@@ -1,12 +1,12 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17
+CXXFLAGS = -Wall -Wextra -std=c++20
 
 # Target executable
 TARGET = animal_app
 
 # Source files
-SRC = main.cpp Animal.cpp
+SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp
 
 # Object files
 OBJ = $(SRC:.cpp=.o)
