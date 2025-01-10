@@ -35,6 +35,10 @@ public:
     //
 
 protected:
+    std::string name_ = {};
+    Points points_ = {10, 10, 0};
+    std::string secret_ = "ClapTrap";
+
     // Con- and destructors, assignements
     explicit ClapTrap(const std::string&, const Points&, const std::string&);
     //
@@ -44,10 +48,6 @@ protected:
     //
 
 private:
-    std::string name_ = {};
-    Points points_ = {10, 10, 0};
-    std::string secret_ = "ClapTrap";
-
     // Members
     // Element access
     bool isDead() const;
