@@ -1,6 +1,7 @@
 #include "Dog.hpp"
 
 #include <iostream>
+
 Dog::Dog() : Animal("Dog") {
     std::cout << "Dog default constructor called\n";
     brain_ = new Brain();

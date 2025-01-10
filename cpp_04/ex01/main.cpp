@@ -20,5 +20,8 @@ int main() {
 
     for (size_t i = 0; i < 10; ++i) delete beasts[i];
 
+    Brain().append("zero").append("first").append("second");
+    std::cout << b << std::endl;
+
     return 0;
 }
