@@ -26,5 +26,5 @@ void Animal::makeSound() const {
 }
 
 Animal::Animal(const std::string& type) : type_(type) {
-    std::cout << "Animal constructor with parameter called\n";
+    std::cout << "Animal assignment constructor called\n";
 }

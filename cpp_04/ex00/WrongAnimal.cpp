@@ -26,5 +26,5 @@ void WrongAnimal::makeSound() const {
 }
 
 WrongAnimal::WrongAnimal(std::string type) : type_(type) {
-    std::cout << "WrongAnimal constructor with parameter called\n";
+    std::cout << "WrongAnimal assignment constructor called\n";
 }
