@@ -1,4 +1,4 @@
-NAME := ClapTrap
+NAME := ScavTrap
 COMPILER := c++
 FLAGS := -std=c++20 -Wall -Wextra -Werror
 SRC := $(wildcard *.cpp)
