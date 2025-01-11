@@ -25,13 +25,13 @@ Brain& Brain::append(const std::string& idea) {
         ideas_[size_++] = idea;
     return *this;
 }
-const std::string& Brain::at(const size_t index) const {
+const std::string& Brain::idea(const size_t index) const {
     return ideas_[index < size_ ? index : size_];
 }
 
 std::ostream& operator<<(std::ostream& os, const Brain& brain) {
     for (size_t i = 0; i < brain.size(); ++i) {
-        os << brain.at(i) << ' ';
+        os << brain.idea(i) << ' ';
     }
     return os;
 }

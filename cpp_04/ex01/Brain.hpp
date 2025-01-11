@@ -12,7 +12,7 @@ public:
     size_t size() const;
 
     Brain& append(const std::string& idea);
-    const std::string& at(const size_t index) const;
+    const std::string& idea(const size_t index) const;
 
 private:
     static const size_t capacity_ = 100;
