@@ -1,37 +1,36 @@
-# Compiler and flags
-CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++20
+NAME := a.out
+COMPILER := c++
+FLAGS := -std=c++20 -Wall -Wextra -Werror
+SRC := main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp WrongDog.cpp
+OBJ := $(SRC:.cpp=.o)
 
-# Target executable
-TARGET = animal_app
+GREEN := \033[32m
+BLUE := \033[34m
+YELLOW := \033[33m
+RED := \033[31m
+RESET := \033[0m
 
-# Source files
-SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp WrongDog.cpp
+all: $(NAME)
 
-# Object files
-OBJ = $(SRC:.cpp=.o)
+$(NAME): $(OBJ)
+	@echo "$(BLUE)🔨 Linking $(NAME)...$(RESET)"
+	$(COMPILER) $(FLAGS) -o $(NAME) $(OBJ)
+	@echo "$(GREEN)🎉 Build successful!$(RESET)"
+	@echo "$(YELLOW)➡️  Usage: ./$(NAME)$(RESET)"
 
-# Default target
-all: $(TARGET)
-
-# Rule to build the target
-$(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $@ $^
-
-# Rule to compile source files into object files
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	@echo "$(YELLOW)📦 Compiling $<...$(RESET)"
+	$(COMPILER) $(FLAGS) -c $< -o $@
 
-# Clean up object files
 clean:
+	@echo "$(RED)🧹 Cleaning object files...$(RESET)"
 	rm -f $(OBJ)
 
-# Full clean (removes object files and executable)
 fclean: clean
-	rm -f $(TARGET)
+	@echo "$(RED)🗑️ Removing $(NAME)...$(RESET)"
+	rm -f $(NAME)
 
-# Rebuild the project
 re: fclean all
+	@echo "$(GREEN)🔄 Rebuild complete!$(RESET)"
 
-# Phony targets
 .PHONY: all clean fclean re

@@ -1,7 +1,7 @@
 NAME := a.out
 COMPILER := c++
 FLAGS := -std=c++20 -Wall -Wextra -Werror
-SRC := $(wildcard *.cpp)
+SRC := main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
 OBJ := $(SRC:.cpp=.o)
 
 GREEN := \033[32m
