@@ -1,5 +1,6 @@
 #pragma once
 
+#include <exception>
 #include <iostream>
 #include <string>
 
@@ -7,25 +8,22 @@ class Bureaucrat {
     enum class Grade { HIGHEST = 1, LOWEST = 150 };
 
 public:
+    class GradeTooHighException : public std::out_of_range {
+    public:
+        using std::out_of_range::out_of_range;
+    };
+
+    class GradeTooLowException : public std::out_of_range {
+    public:
+        using std::out_of_range::out_of_range;
+    };
+
+public:
     Bureaucrat() = delete;
     Bureaucrat(const std::string& name, int grade);
     Bureaucrat(const Bureaucrat& other) = default;
     Bureaucrat& operator=(const Bureaucrat& other) &;
     ~Bureaucrat() = default;
-
-    class GradeTooHighException : public std::exception {
-    public:
-        const char* what() const noexcept override {
-            return "Grade is too high!";
-        }
-    };
-
-    class GradeTooLowException : public std::exception {
-    public:
-        const char* what() const noexcept override {
-            return "Grade is too low!";
-        }
-    };
 
     [[nodiscard]] std::string getName() const noexcept;
     [[nodiscard]] int getGrade() const noexcept;

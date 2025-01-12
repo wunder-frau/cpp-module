@@ -13,6 +13,11 @@ int main() {
         std::cerr << "Exception caught: " << e.what() << std::endl;
     } catch (const Bureaucrat::GradeTooLowException& e) {
         std::cerr << "Exception caught: " << e.what() << std::endl;
+    } catch (const std::out_of_range& e) {
+        std::cerr << "Exception out_of_range caught: " << e.what() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "std::exception: most probable smth serious happened"
+                  << e.what() << std::endl;
     }
 
     try {

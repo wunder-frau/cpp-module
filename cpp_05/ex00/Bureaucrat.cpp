@@ -2,9 +2,9 @@
 
 void Bureaucrat::validateGrade() const {
     if (grade_ < static_cast<int>(Grade::HIGHEST)) {
-        throw GradeTooHighException();
+        throw GradeTooHighException("Grade is too high!");
     } else if (grade_ > static_cast<int>(Grade::LOWEST)) {
-        throw GradeTooLowException();
+        throw GradeTooLowException("Grade is too low!");
     }
 }
 
@@ -26,14 +26,14 @@ int Bureaucrat::getGrade() const noexcept { return grade_; }
 
 void Bureaucrat::incrementGrade() {
     if (grade_ <= static_cast<int>(Grade::HIGHEST)) {
-        throw GradeTooHighException();
+        throw GradeTooHighException("Grade is too high!");
     }
     --grade_;
 }
 
 void Bureaucrat::decrementGrade() {
     if (grade_ >= static_cast<int>(Grade::LOWEST)) {
-        throw GradeTooLowException();
+        throw GradeTooLowException("Grade is too low!");
     }
     ++grade_;
 }
