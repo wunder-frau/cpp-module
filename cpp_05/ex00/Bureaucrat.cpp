@@ -1,9 +1,9 @@
 #include "Bureaucrat.hpp"
 
 void Bureaucrat::validateGrade() const {
-    if (grade_ < GRADE_HIGHEST) {
+    if (grade_ < static_cast<int>(Grade::HIGHEST)) {
         throw GradeTooHighException();
-    } else if (grade_ > GRADE_LOWEST) {
+    } else if (grade_ > static_cast<int>(Grade::LOWEST)) {
         throw GradeTooLowException();
     }
 }
@@ -25,14 +25,14 @@ std::string Bureaucrat::getName() const noexcept { return name_; }
 int Bureaucrat::getGrade() const noexcept { return grade_; }
 
 void Bureaucrat::incrementGrade() {
-    if (grade_ <= GRADE_HIGHEST) {
+    if (grade_ <= static_cast<int>(Grade::HIGHEST)) {
         throw GradeTooHighException();
     }
     --grade_;
 }
 
 void Bureaucrat::decrementGrade() {
-    if (grade_ >= GRADE_LOWEST) {
+    if (grade_ >= static_cast<int>(Grade::LOWEST)) {
         throw GradeTooLowException();
     }
     ++grade_;

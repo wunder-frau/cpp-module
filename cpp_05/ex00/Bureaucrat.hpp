@@ -3,10 +3,9 @@
 #include <iostream>
 #include <string>
 
-inline constexpr int GRADE_HIGHEST = 1;
-inline constexpr int GRADE_LOWEST = 150;
-
 class Bureaucrat {
+    enum class Grade { HIGHEST = 1, LOWEST = 150 };
+
 public:
     Bureaucrat() = delete;
     Bureaucrat(const std::string& name, int grade);
