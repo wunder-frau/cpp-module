@@ -1,7 +1,7 @@
 #pragma once
 #include "AForm.hpp"
 
-class PresidentialPardonForm final : public AForm {  // Marked as final
+class PresidentialPardonForm final : public AForm {
 public:
     PresidentialPardonForm(std::string target);
     PresidentialPardonForm(const PresidentialPardonForm& other) = default;

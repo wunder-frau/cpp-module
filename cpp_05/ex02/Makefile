@@ -1,7 +1,7 @@
 NAME := a.out
 COMPILER := c++
 FLAGS := -std=c++20 -Wall -Wextra -Werror
-SRC := main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp
+SRC := main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 OBJ := $(SRC:.cpp=.o)
 
 GREEN := \033[32m

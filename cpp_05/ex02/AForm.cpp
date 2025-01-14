@@ -47,11 +47,11 @@ bool AForm::beSigned(const Bureaucrat& b) {
     return true;
 }
 
-void AForm::execute(const Bureaucrat& b) const {
+void AForm::execute(const Bureaucrat& executor) const {
     if (!isSigned_) {
         throw AForm::FormNotSignedException("Form is not signed.");
     }
-    if (b.getGrade() > executeGrade_) {
+    if (executor.getGrade() > executeGrade_) {
         throw AForm::GradeTooLowException("Grade is too low!");
     }
     doExecution();

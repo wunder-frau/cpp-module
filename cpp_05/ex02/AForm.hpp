@@ -44,7 +44,7 @@ public:
 
     // Methods
     bool beSigned(const Bureaucrat& b);
-    void execute(const Bureaucrat& b) const;
+    void execute(const Bureaucrat& executor) const;
 
 protected:
     virtual void doExecution() const = 0;
