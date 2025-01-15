@@ -50,6 +50,13 @@ void ScalarConverter::printChar(double value) {
     }
 }
 
+void ScalarConverter::printAllValues(double value) {
+    printInt(value);
+    printFloat(value);
+    printDouble(value);
+    printChar(value);
+}
+
 double ScalarConverter::convertValue(const std::string& literal) {
     if (isPseudoLiteral(literal)) {
         return std::stod(literal);
@@ -92,9 +99,7 @@ void ScalarConverter::convert(const std::string& literal) {
     try {
         validateInput(literal);
         double value = convertValue(literal);
-        printInt(value);
-        printFloat(value);
-        printDouble(value);
+        printAllValues(value);
     } catch (const std::out_of_range& e) {
         std::cerr << "Error: Input value out of range for type conversion."
                   << std::endl;
