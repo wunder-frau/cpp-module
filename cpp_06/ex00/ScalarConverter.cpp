@@ -11,6 +11,11 @@ bool ScalarConverter::isInteger(const std::string& str) {
     return std::regex_match(str, intRegex);
 }
 
+bool ScalarConverter::isFloat(const std::string& str) {
+    std::regex floatRegex("[-+]?[0-9]*\\.[0-9]+f");
+    return std::regex_match(str, floatRegex);
+}
+
 void ScalarConverter::printInt(double value) {
     if (value < std::numeric_limits<int>::min() ||
         value > std::numeric_limits<int>::max() || std::isnan(value)) {
@@ -20,12 +25,20 @@ void ScalarConverter::printInt(double value) {
     }
 }
 
+void ScalarConverter::printFloat(double value) {
+    std::cout << "float: " << std::fixed << std::setprecision(1)
+              << static_cast<float>(value) << "f" << std::endl;
+}
+
 double ScalarConverter::convertValue(const std::string& literal) {
     if (isPseudoLiteral(literal)) {
         return std::stod(literal);
     }
     if (isInteger(literal)) {
         return std::stoi(literal);
+    }
+    if (isFloat(literal)) {
+        return std::stof(literal);
     }
     throw std::invalid_argument(
         "Input must be a pseudo-literal, integer, float, double, or single "
@@ -42,7 +55,7 @@ void ScalarConverter::validateInput(const std::string& literal) {
                 "Input contains non-printable characters");
         }
     }
-    if (!isPseudoLiteral(literal) && !isInteger(literal)) {
+    if (!isPseudoLiteral(literal) && !isInteger(literal) && !isFloat(literal)) {
         throw std::invalid_argument("Invalid literal format");
     }
 }
@@ -52,6 +65,7 @@ void ScalarConverter::convert(const std::string& literal) {
         validateInput(literal);
         double value = convertValue(literal);
         printInt(value);
+        printFloat(value);
     } catch (const std::out_of_range& e) {
         std::cerr << "Error: Input value out of range for type conversion."
                   << std::endl;
