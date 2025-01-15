@@ -40,6 +40,16 @@ void ScalarConverter::printDouble(double value) {
               << std::endl;
 }
 
+void ScalarConverter::printChar(double value) {
+    if (value < 0 || value > 255 || std::isnan(value)) {
+        std::cout << "char: impossible" << std::endl;
+    } else if (!std::isprint(static_cast<int>(value))) {
+        std::cout << "char: Non displayable" << std::endl;
+    } else {
+        std::cout << "char: '" << static_cast<char>(value) << "'" << std::endl;
+    }
+}
+
 double ScalarConverter::convertValue(const std::string& literal) {
     if (isPseudoLiteral(literal)) {
         return std::stod(literal);
