@@ -24,16 +24,6 @@ bool AForm::isSigned() const { return isSigned_; }
 int AForm::getSignGrade() const { return signGrade_; }
 int AForm::getExecuteGrade() const { return executeGrade_; }
 std::string AForm::getTarget() const { return target_; }
-// void AForm::beSigned(const Bureaucrat& bureaucrat) {
-//     if (bureaucrat.getGrade() > signGrade_) {
-//         throw AForm::GradeTooHighException(
-//             "Bureaucrat's grade is too low to sign the form.");
-//     }
-//     if (isSigned_) {
-//         throw std::logic_error("Form is already signed.");
-//     }
-//     isSigned_ = true;
-// }
 
 bool AForm::beSigned(const Bureaucrat& b) {
     if (b.getGrade() > signGrade_) {
