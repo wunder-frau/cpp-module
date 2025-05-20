@@ -10,8 +10,8 @@ public:
     static Data* deserialize(uintptr_t raw);
 
 private:
-    Serializer() = default;
-    Serializer(const Serializer& other) = default;
-    Serializer& operator=(const Serializer& other) = default;
-    ~Serializer() = default;
+    Serializer() = delete;
+    Serializer(const Serializer&) = delete;
+    Serializer& operator=(const Serializer&) = delete;
+    ~Serializer() = delete;
 };
