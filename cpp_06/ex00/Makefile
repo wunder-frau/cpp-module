@@ -1,4 +1,4 @@
-NAME := ScalarConverter
+NAME := convert
 COMPILER := c++
 FLAGS := -std=c++20 -Wall -Wextra -Werror
 SRC := main.cpp ScalarConverter.cpp
