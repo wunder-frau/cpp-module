@@ -7,7 +7,12 @@
 #include "C.hpp"
 
 Base* generate() {
-    std::srand(std::time(nullptr));
+    static bool seeded = false;
+    if (!seeded) {
+        std::srand(static_cast<unsigned>(std::time(nullptr)));
+        seeded = true;
+    }
+
     int value = std::rand() % 3;
     switch (value) {
         case 0:
@@ -17,17 +22,20 @@ Base* generate() {
         case 2:
             return new C;
         default:
-            return nullptr;
+            return nullptr;  // Should not happen
     }
 }
 
 void identify(Base* p) {
     if (dynamic_cast<A*>(p)) {
         std::cout << "A\n";
+        return;
     } else if (dynamic_cast<B*>(p)) {
         std::cout << "B\n";
+        return;
     } else if (dynamic_cast<C*>(p)) {
         std::cout << "C\n";
+        return;
     } else {
         std::cout << "Unknown type\n";
     }
@@ -37,18 +45,25 @@ void identify(Base& p) {
     try {
         (void)dynamic_cast<A&>(p);
         std::cout << "A\n";
+        return;
     } catch (std::bad_cast&) {
     }
+
     try {
         (void)dynamic_cast<B&>(p);
         std::cout << "B\n";
+        return;
     } catch (std::bad_cast&) {
     }
+
     try {
         (void)dynamic_cast<C&>(p);
         std::cout << "C\n";
+        return;
     } catch (std::bad_cast&) {
     }
+
+    std::cout << "Unknown type\n";
 }
 
 int main() {
