@@ -1,21 +1,27 @@
 #include "ScalarConverter.hpp"
 // Test cases
-//         "42",           // Integer
-//         "-42",          // Negative integer
-//         "4.2",          // Double
-//         "4.2f",         // Float
-//         "nan",          // Pseudo-literal (double)
-//         "nanf",         // Pseudo-literal (float)
-//         "+inf",         // Positive infinity (double)
-//         "-inf",         // Negative infinity (double)
-//         "+inff",        // Positive infinity (float)
-//         "-inff",        // Negative infinity (float)
-//         "a",            // Single character
-//         "\x01",         // Non-displayable character
-//         "2147483647",   // Max int
-//         "-2147483648",  // Min int
-//         "2147483648",   // Out-of-range int
-//         "invalid"       // Invalid input
+
+// int main() {
+//     std::string tests[] = {
+//         "a",     "Z",          "!",           "0",
+//         "42",    "-42",        "+123",        "4.2f",
+//         "-4.2f", "+0.0f",      ".5f",         "+.1f",
+//         "1.f",   "4.2",        "-4.2",        "0.0",
+//         ".2",    "1.",         "+.3",         "nan",
+//         "+inf",  "-inf",       "nanf",        "+inff",
+//         "-inff", "",           "abc",         "42abc",
+//         "4.2ff", "--42",       "4.2.2",       "999999999999999999999",
+//         "31",    "32",         "126",         "127",
+//         "128",   "2147483647", "-2147483648", "\x01",
+//     };
+
+//     for (const auto& t : tests) {
+//         std::cout << "Test: \"" << t << "\"" << std::endl;
+//         ScalarConverter::convert(t);
+//         std::cout << "---------------------" << std::endl;
+//     }
+// }
+
 int main(int argc, char **argv) {
     if (argc != 2) {
         std::cout << "Usage: ./ScalarConverter <literal>" << std::endl;

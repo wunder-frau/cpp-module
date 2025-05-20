@@ -30,19 +30,3 @@ private:
     static void printFloat(double value);
     static void printDouble(double value);
 };
-// class ScalarConverter {
-// private:
-//     ScalarConverter() = default;
-//     ScalarConverter(const ScalarConverter &other) = default;
-//     ScalarConverter &operator=(const ScalarConverter &other) = default;
-//     ~ScalarConverter() = default;
-
-//     static bool isPseudoLiteral(const std::string &literal);
-//     static void printChar(double value);
-//     static void printInt(double value);
-//     static void printFloat(double value);
-//     static void printDouble(double value);
-
-// public:
-//     static void convert(const std::string &literal);
-// };

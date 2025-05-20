@@ -12,12 +12,12 @@ bool ScalarConverter::isInteger(const std::string& str) {
 }
 
 bool ScalarConverter::isFloat(const std::string& str) {
-    std::regex floatRegex("[-+]?[0-9]*\\.[0-9]+f");
+    std::regex floatRegex(R"([-+]?(?:[0-9]+\.[0-9]*|\.[0-9]+)f)");
     return std::regex_match(str, floatRegex);
 }
 
 bool ScalarConverter::isDouble(const std::string& str) {
-    std::regex doubleRegex("[-+]?[0-9]*\\.[0-9]+");
+    std::regex doubleRegex(R"([-+]?(?:[0-9]+\.[0-9]*|\.[0-9]+))");
     return std::regex_match(str, doubleRegex);
 }
 
@@ -31,8 +31,17 @@ void ScalarConverter::printInt(double value) {
 }
 
 void ScalarConverter::printFloat(double value) {
-    std::cout << "float: " << std::fixed << std::setprecision(1)
-              << static_cast<float>(value) << "f" << std::endl;
+    float f = static_cast<float>(value);
+    if (std::isinf(f)) {
+        std::cout << "float: impossible" << std::endl;
+    } else if (static_cast<double>(f) != value &&
+               std::fabs(value) > 1000000.0) {
+        std::cout << "float: approx " << std::fixed << std::setprecision(1) << f
+                  << "f" << std::endl;
+    } else {
+        std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f"
+                  << std::endl;
+    }
 }
 
 void ScalarConverter::printDouble(double value) {
@@ -41,7 +50,7 @@ void ScalarConverter::printDouble(double value) {
 }
 
 void ScalarConverter::printChar(double value) {
-    if (value < 0 || value > 255 || std::isnan(value)) {
+    if (value < 0 || value > 127 || std::isnan(value)) {
         std::cout << "char: impossible" << std::endl;
     } else if (!std::isprint(static_cast<int>(value))) {
         std::cout << "char: Non displayable" << std::endl;
