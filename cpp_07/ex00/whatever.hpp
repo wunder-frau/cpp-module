@@ -5,7 +5,8 @@
 // Swap: requires copyable and assignable types only
 template <typename T>
 void swap(T& a, T& b) {
-    T temp = a;
+    T temp;
+    temp = a;
     a = b;
     b = temp;
 }

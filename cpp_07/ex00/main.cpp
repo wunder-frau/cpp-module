@@ -8,7 +8,7 @@
 class Point {
 public:
     int x;
-    Point(int val) : x(val) {}
+    Point(int val = 0) : x(val) {}
 
     // Provides all comparison operators automatically
     auto operator<=>(const Point&) const = default;
