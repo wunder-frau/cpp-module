@@ -1,4 +1,3 @@
-# 📦 Project Configuration
 NAME     := RPN
 CXX      := c++
 CXXFLAGS := -std=c++20 -Wall -Wextra -Werror
@@ -6,7 +5,6 @@ CXXFLAGS := -std=c++20 -Wall -Wextra -Werror
 SRC := main.cpp RPN.cpp
 OBJ := $(SRC:.cpp=.o)
 
-# 🔨 Build Target
 all: $(NAME)
 
 $(NAME): $(OBJ)
