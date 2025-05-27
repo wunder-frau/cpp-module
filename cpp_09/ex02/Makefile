@@ -10,21 +10,24 @@ LOG = debug.log
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "🔗 Linking PmergeMe executable..."
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
+	@echo "🔗 Linking the mighty $(NAME)..."
+	@$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
+	@echo "✅ Build complete! Your binary is ready to merge! 🧩"
 
 %.o: %.cpp PmergeMe.hpp
-	@echo "🛠️ Compiling $< into object file..."
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	@echo "🛠️ Compiling $<... Please wait, magic in progress! ✨"
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	@echo "🧹 Cleaning build artifacts and logs..."
-	rm -f $(OBJ) $(LOG)
+	@echo "🧹 Cleaning up object files and logs... 👋"
+	@rm -f $(OBJ) $(LOG)
+	@echo "🗑️ Cleaned successfully!"
 
 fclean: clean
-	@echo "💣 Removing PmergeMe executable..."
-	rm -f $(NAME)
+	@echo "💣 Removing $(NAME)... Hope you said goodbye! 😢"
+	@rm -f $(NAME)
 
 re: fclean all
+	@echo "🔄 Rebuilding from scratch... Let's goooo! 🚴‍♂️💨"
 
 .PHONY: all clean fclean re
